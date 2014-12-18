@@ -13,7 +13,7 @@ data CharSet = CS_Any
 csetValue : CharSet -> List Char
 csetValue CS_Any        = map chr [0..255]
 csetValue CS_Word       = ('_' :: csetValue CS_Alnum)
-csetValue CS_Whitespace = ['\t','\r','\n']
+csetValue CS_Whitespace = [' ','\t','\r','\n']
 csetValue CS_Digit      = ['0','1','2','3','4','5','6','7','8','9']
 csetValue CS_Ascii      = map chr [0..127]
 csetValue CS_Alpha      = filter isAlpha      $ csetValue CS_Any

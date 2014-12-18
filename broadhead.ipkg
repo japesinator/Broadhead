@@ -7,3 +7,4 @@ modules = Broadhead.Arrow
         , Broadhead.Combinator
         , Broadhead.Core
         , Broadhead.Prim
+        , Broadhead.Strings
