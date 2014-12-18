@@ -38,3 +38,9 @@ string s = arrow (\_ => ' ')
        >>> arrow (\_ => s) where
          ffoldr : (a -> b -> b) -> b -> List a -> b
          ffoldr = foldr
+
+Parser : Type -> Type
+Parser = BP String
+
+parseString : Parser o -> String -> Either (List String) o
+parseString = runParser
