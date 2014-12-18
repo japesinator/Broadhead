@@ -1,0 +1,9 @@
+package broadhead
+
+sourcedir = src
+
+modules = Broadhead.Arrow
+        , Broadhead.CharSet
+        , Broadhead.Combinator
+        , Broadhead.Core
+        , Broadhead.Prim
