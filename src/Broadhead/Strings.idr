@@ -33,8 +33,8 @@ spaces = some whiteChar >>> arrow pack
 
 string : String -> BP i String
 string "" = arrow (\_ => "")
-string s  = arrow (\_ => ' ')
-        >>> foldr (>>>) (char $ strHead s) (map char (unpack $ strTail s))
+string s  = arrow  (\_ => ' ')
+        >>> foldl (>>>) (char $ strHead s) (map char (unpack $ strTail s))
         >>> arrow (\_ => s)
 
 Parser : Type -> Type
