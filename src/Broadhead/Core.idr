@@ -13,6 +13,7 @@ infixr 5 <==>
 data BP : Type -> Type -> Type -> Type where
   PEmpty   :                                       BP t i       o
   PPrim    :                           (i -> o) -> BP t i       o
+  PEqual   :                            Char    -> BP t i       Char
   PCSet    :                            CharSet -> BP t i       Char
   PNot     :                       BP t i    o  -> BP t i       o
   PStar    : {o : Type} ->         BP t i    o  -> BP t i       (List o)
