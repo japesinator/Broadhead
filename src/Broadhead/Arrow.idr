@@ -6,7 +6,6 @@ import Control.Category
 infixr 5 <++>
 infixr 2 +++
 infixr 2 \|/
-infixr 1 >>^
 
 class Arrow arr => ArrowZero (arr : Type -> Type -> Type) where
   zeroArrow : arr a b
@@ -60,6 +59,3 @@ instance ArrowApply a => Monad (ArrowMonad a) where
 
 class Arrow arr => ArrowLoop (arr : Type -> Type -> Type) where
   loop : arr (Pair a c) (Pair b c) -> arr a b
-
-(>>^) : Arrow a => a b c -> (c -> d) -> a b d
-a >>^ f = a >>> arrow f
