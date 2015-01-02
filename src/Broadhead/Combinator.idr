@@ -6,6 +6,11 @@ import Broadhead.Core
 import Control.Arrow
 import Control.Category
 
+infixr 1 >>^
+private
+(>>^) : Arrow a => a b c -> (c -> d) -> a b d
+a >>^ f = a >>> arrow f
+
 ||| Match nothing at all
 empty : BP i o
 empty = PEmpty
@@ -24,31 +29,20 @@ notFollowedBy = PNot
 
 ||| Match a list of things seperated by other things
 sepBy : BP i o -> BP i o' -> BP i (List o)
-sepBy p s = many (p &&& s `comp` fst) where
-  comp : Arrow a => a b c -> (c -> d) -> a b d
-  comp a f = a >>> arrow f
+sepBy p s = many (p &&& s >>^ fst)
 
 ||| Match at least one thing seperated by other things
 sepBy1 : BP i o -> BP i o' -> BP i (List o)
-sepBy1 p s = (many (p &&& s `comp` fst) &&& p) `comp` (\(bs,b) => bs++[b]) where
-  comp : Arrow a => a b c -> (c -> d) -> a b d
-  comp a f = a >>> arrow f
+sepBy1 p s = (many (p &&& s >>^ fst) &&& p) >>^ (\(bs,b) => bs++[b])
 
 ||| Match n occurences of something
 nTimes : (n : Nat) -> BP i o -> BP i (Vect (S n) o)
-nTimes (S Z)     p = p `comp` pure where
-  comp : Arrow a => a b c -> (c -> d) -> a b d
-  comp a f = a >>> arrow f
-nTimes (S (S n)) p = (p &&& nTimes (S n) p) `comp`  (\(b,bs) => (b::bs)) where
-  comp : Arrow a => a b c -> (c -> d) -> a b d
-  comp a f = a >>> arrow f
-
+nTimes (S Z)     p = p >>^ pure
+nTimes (S (S n)) p = (p &&& nTimes (S n) p) >>^  (\(b,bs) => (b::bs))
 
 ||| Match a thing inbetween an opening and closing thing
 between : BP i p -> BP p c -> BP p o -> BP i o
-between open close real = open >>> (real &&& close) `comp` fst where
-  comp : Arrow a => a b c -> (c -> d) -> a b d
-  comp a f = a >>> arrow f
+between open close real = open >>> (real &&& close) >>^ fst
 
 ||| Match something. Or don't. It's whatever, man
 optional : BP i o -> BP i (Maybe o)
