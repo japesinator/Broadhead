@@ -7,7 +7,6 @@ import Control.Arrow
 import Control.Category
 
 infixr 1 >>^
-private
 (>>^) : Arrow a => a b c -> (c -> d) -> a b d
 a >>^ f = a >>> arrow f
 

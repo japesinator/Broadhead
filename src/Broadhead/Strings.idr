@@ -32,10 +32,13 @@ spaces : BP i String
 spaces = some whiteChar >>> arrow pack
 
 string : String -> BP i String
-string "" = arrow (\_ => "")
-string s  = arrow  (\_ => ' ')
-        >>> foldl (>>>) (char $ strHead s) (map char (unpack $ strTail s))
-        >>> arrow (\_ => s)
+string xs with (strM xs)
+  string ""             | StrNil        = arrow (\_ => "")
+  string (strCons x xs) | (StrCons _ _) = arrow  (\_ => ' ')
+                                      >>> foldl (>>>)
+                                                (char x)
+                                                (map char $ unpack xs)
+                                      >>> arrow (\_ => (strCons x xs))
 
 Parser : Type -> Type
 Parser = BP String
