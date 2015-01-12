@@ -32,7 +32,7 @@ spaces : BP i String
 spaces = some whiteChar >>> arrow pack
 
 string : String -> BP i String
-string xs with (strM xs)
+string s with (strM s)
   string ""             | StrNil        = arrow (\_ => "")
   string (strCons x xs) | (StrCons _ _) = arrow  (\_ => ' ')
                                       >>> foldl (>>>)
