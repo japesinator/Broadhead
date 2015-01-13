@@ -6,7 +6,8 @@
 
 We'll parse a simple sentence
 
-> parseString (sepBy1 word spaces) "The quick brown fox jumped over the lazy dog"
+> result : Either (List String) (List String)
+> result = parseString (sepBy1 word spaces) "The quick brown fox jumped over the lazy dog"
 
 This returns:
 
