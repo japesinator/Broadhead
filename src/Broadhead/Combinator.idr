@@ -1,6 +1,5 @@
 module Broadhead.Combinator
 
-import Broadhead.Arrow
 import Broadhead.CharSet
 import Broadhead.Core
 import Control.Arrow

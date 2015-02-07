@@ -1,5 +1,8 @@
 module Broadhead.Strings
 
+import Control.Arrow
+import Control.Category
+import Broadhead.CharSet
 import Broadhead.Core
 import Broadhead.Combinator
 import Broadhead.Prim

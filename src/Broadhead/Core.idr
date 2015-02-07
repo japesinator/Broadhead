@@ -1,9 +1,9 @@
 module Broadhead.Core
 
-import Broadhead.Arrow
 import Broadhead.CharSet
 import Control.Arrow
 import Control.Category
+import Data.Vect
 
 infixr 5 <->>
 infixr 5 <<->

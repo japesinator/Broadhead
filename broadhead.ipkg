@@ -2,8 +2,7 @@ package broadhead
 
 sourcedir = src
 
-modules = Broadhead.Arrow
-        , Broadhead.CharSet
+modules = Broadhead.CharSet
         , Broadhead.Combinator
         , Broadhead.Core
         , Broadhead.Prim
