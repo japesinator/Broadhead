@@ -28,6 +28,9 @@ alnum = PCSet CS_Alnum
 anyOf : Vect n Char -> BP i Char
 anyOf = PChoice . (map char)
 
+noneOf : Vect n Char -> BP i Char
+noneOf = PNot . anyOf
+
 word :  BP i String
 word = some wordChar >>> arrow pack
 
